@@ -55,3 +55,31 @@ import App from "./App.vue"; // 引入自定义组件，你在页面上看的东
 createApp(App).mount("#app"); // 把App挂载到#app节点上，在public目录下的index.html找节点
 
 `````
+
+#### vue3+ts router配置
+
+````text
+npm install vue-router
+````
+
+`````javascript
+// 1.创建router文件 然后创建router.ts
+import { createRouter,createWebHistory } from "vue-router";
+import login from '../views/login.vue';
+const router = createRouter({
+    history:createWebHistory(),
+    routes:[
+        {
+            path:'/',
+            component:login,
+        }
+    ]
+})
+export default router;
+
+// 2.在main.ts文件引入
+import router from "./router/router"
+createApp(App).use(router).mount('#app')
+`````
+
+

@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="login">
     
   </div>
 </template>
@@ -8,7 +8,7 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'HelloWorld',
+  name: 'login',
   props: {
     msg: String,
   },
