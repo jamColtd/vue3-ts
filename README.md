@@ -82,4 +82,12 @@ import router from "./router/router"
 createApp(App).use(router).mount('#app')
 `````
 
+##### 连接github
+
+ssh -T git@github.com
+
+推送本地文件到远程
+
+git push -u origin master
+
 
