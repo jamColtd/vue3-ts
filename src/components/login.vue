@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="login">
     <div class="login-box">
       <!-- <header>登录</header> -->
       <div class="body">
@@ -38,7 +38,7 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'HelloWorld',
+  name: 'login',
   props: {
     msg: String,
   },

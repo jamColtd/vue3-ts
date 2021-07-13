@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="home">
     <div class="login-box"></div>
   </div>
 </template>
@@ -8,7 +8,7 @@
 import { defineComponent, ref } from "vue";
 
 export default defineComponent({
-  name: "login",
+  name: "home",
   props: {
     msg: String,
   },
