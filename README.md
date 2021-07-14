@@ -158,4 +158,48 @@ export default defineComponent({
 </script>
 `````
 
+##### 周期函数
+
+`````javascript
+    // 记得引入
+    import { 
+        defineComponent, 
+        ref, 
+        reactive, 
+        toRefs, 
+        onBeforeMount, 
+        onMounted,
+        onBeforeUpdate,
+        onUpdated,
+        onBeforeUnmount,//组件卸载之前
+        onUnmounted,//组件卸载之后
+    } from 'vue';
+
+
+
+    onBeforeMount(()=>{
+        console.log("2-组件挂载到页面之前执行----onBeforeMount()")
+    })
+
+    onMounted(()=>{
+    console.log("3-组件挂载到页面之后执行的----onMounted")
+    })
+
+    onBeforeUpdate(()=>{
+    console.log("4-组件更新之前执行的---onBeforeUpdate")
+    })
+
+    onUpdated(()=>{
+    console.log("5.组件更新之后执行的---onUpdated")
+    })
+
+    onBeforeUnmount(()=>{
+    console.log("6.组件卸载之前执行的----onBeforeUnmount")
+    })
+
+    onUnmounted(()=>{
+    console.log("7.组件卸载之后执行的----onUnmounted")
+    })
+`````
+
 
