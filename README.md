@@ -120,4 +120,42 @@ export default defineComponent({
 </script>
 ````
 
+#### 使用reactive 
+
+1.使用reactive把函数包裹
+2.使用toRefs函数包裹函数
+3.再return出去,使用扩展扩展符号... 在页面就可以调用
+
+`````javascript
+<script lang="ts">
+  import { defineComponent ,ref, reactive, toRefs} from 'vue';
+  import HelloWorld from './components/login.vue';
+
+  interface DataProps{  //typescript接口
+    heros: string[];
+    selectHero: string;
+    selectHeroFun: (index: number) => void;
+  }
+
+  export default({
+    name: 'App',
+    setup(){
+        /* reactive 使用 取ref的值不用使用selectHero.value后面增加value*/
+      const data: DataProps = reactive({ //ts类型注解
+        heros:["刘备", "张飞", "关羽"],
+        selectHero:'',
+        selectHeroFun:(index:number)=>{
+          data.selectHero = data.heros[index]
+        }
+      });
+      const refData = toRefs(data);
+
+      return{
+        ...refData
+      }
+    }
+  });
+</script>
+`````
+
 

@@ -15,24 +15,32 @@
 </template>
 
 <script lang="ts">
-import { defineComponent ,ref} from 'vue';
-import HelloWorld from './components/login.vue';
+  import { defineComponent ,ref, reactive, toRefs} from 'vue';
+  import HelloWorld from './components/login.vue';
 
-export default defineComponent({
-  name: 'App',
-  setup(){
-    const heros = ref(["刘备", "张飞", "关羽"]);
-    const selectHero = ref("");
-    const selectHeroFun = (index:number) => {
-      selectHero.value = heros.value[index]
-    }
-    return{
-      heros,
-      selectHero,
-      selectHeroFun
-    }
+  interface DataProps{
+    heros: string[];
+    selectHero: string;
+    selectHeroFun: (index: number) => void;
   }
-});
+
+  export default({
+    name: 'App',
+    setup(){
+      const data: DataProps = reactive({
+        heros:["刘备", "张飞", "关羽"],
+        selectHero:'',
+        selectHeroFun:(index:number)=>{
+          data.selectHero = data.heros[index]
+        }
+      });
+      const refData = toRefs(data);
+
+      return{
+        ...refData
+      }
+    }
+  });
 </script>
 
 <style>
