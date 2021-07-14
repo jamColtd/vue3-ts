@@ -90,4 +90,34 @@ ssh -T git@github.com
 
 git push -u origin master
 
+#### 使用setup 和 ref方法
+
+````javascript
+<script lang="ts">
+import { defineComponent ,ref} from 'vue';
+import HelloWorld from './components/login.vue';
+
+export default defineComponent({
+  name: 'App',
+    //   不需要在使用data，methods里面放方法
+    /**1.使用setup里面直接可以放一些方法和值，
+    2.取ref的值要带上value，
+    3.界面使用的要 return 出去
+    */
+  setup(){
+    const heros = ref(["刘备", "张飞", "关羽"]);
+    const selectHero = ref("");
+    const selectHeroFun = (index:number) => {
+      selectHero.value = heros.value[index]
+    }
+    return{
+      heros,
+      selectHero,
+      selectHeroFun
+    }
+  }
+});
+</script>
+````
+
 

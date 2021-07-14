@@ -1,17 +1,36 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
+  <img alt="Vue logo" src="./assets/logo.png">
   <HelloWorld />
-  <router-view></router-view>
+  <h2>欢迎来到德莱联盟</h2>
+  <div>请选择一个英雄</div>
+  <div>
+    <button 
+      v-for="(item, index) in heros" 
+      :key="index"
+      @click="selectHeroFun(index)"
+    >
+      {{ index }}:{{ item }}</button>
+  </div>
+  <div>你选择的英雄是【{{ selectHero }}】</div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent ,ref} from 'vue';
 import HelloWorld from './components/login.vue';
 
 export default defineComponent({
   name: 'App',
-  components: {
-    HelloWorld
+  setup(){
+    const heros = ref(["刘备", "张飞", "关羽"]);
+    const selectHero = ref("");
+    const selectHeroFun = (index:number) => {
+      selectHero.value = heros.value[index]
+    }
+    return{
+      heros,
+      selectHero,
+      selectHeroFun
+    }
   }
 });
 </script>

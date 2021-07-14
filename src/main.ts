@@ -6,7 +6,7 @@ import 'view-design/dist/styles/iview.css';
 
 
 
-createApp(App).use(VueRouter).mount('#app')
+createApp(App).mount('#app')
 
 const router = [
     {
