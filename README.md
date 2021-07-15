@@ -202,4 +202,21 @@ export default defineComponent({
     })
 `````
 
+##### 状态追踪 onRenderTracked and onRenderTriggered
+
+1.onRenderTracked 追踪所有的状态
+2.onRenderTriggered 精准追踪状态
+````javascript
+
+    onRenderTracked((event)=>{
+        console.log("状态跟踪钩子函数---------")
+        console.log(event)
+    })
+
+    onRenderTriggered((event)=>{
+        console.log("状态精准跟踪钩子函数---------onRenderTriggered")
+        console.log(event)
+    })
+````
+
 

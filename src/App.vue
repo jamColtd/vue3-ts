@@ -26,6 +26,8 @@
     onUpdated,
     onBeforeUnmount,//组件卸载之前
     onUnmounted,
+    onRenderTracked,//vue3新增加的 状态 跟踪
+    onRenderTriggered,
   } from 'vue';
   import HelloWorld from './components/login.vue';
 
@@ -68,6 +70,16 @@
 
       onUnmounted(()=>{
         console.log("7.组件卸载之后执行的----onUnmounted")
+      })
+
+      onRenderTracked((event)=>{
+        console.log("状态跟踪钩子函数---------")
+        console.log(event)
+      })
+
+      onRenderTriggered((event)=>{
+        console.log("状态精准跟踪钩子函数---------onRenderTriggered")
+        console.log(event)
       })
 
       const refData = toRefs(data);
