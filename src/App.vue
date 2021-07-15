@@ -12,6 +12,8 @@
       {{ index }}:{{ item }}</button>
   </div>
   <div>你选择的英雄是【{{ selectHero }}】</div>
+  <div><button @click="overAction">选择完毕</button></div>
+  <div>{{overText}}</div>
 </template>
 
 <script lang="ts">
@@ -28,6 +30,7 @@
     onUnmounted,
     onRenderTracked,//vue3新增加的 状态 跟踪
     onRenderTriggered,
+    watch,
   } from 'vue';
   import HelloWorld from './components/login.vue';
 
@@ -48,44 +51,26 @@
           data.selectHero = data.heros[index]
         }
       });
-      onBeforeMount(()=>{
-        console.log("2-组件挂载到页面之前执行----onBeforeMount()")
-      })
-
-      onMounted(()=>{
-        console.log("3-组件挂载到页面之后执行的----onMounted")
-      })
-
-      onBeforeUpdate(()=>{
-        console.log("4-组件更新之前执行的---onBeforeUpdate")
-      })
-
-      onUpdated(()=>{
-        console.log("5.组件更新之后执行的---onUpdated")
-      })
-
-      onBeforeUnmount(()=>{
-        console.log("6.组件卸载之前执行的----onBeforeUnmount")
-      })
-
-      onUnmounted(()=>{
-        console.log("7.组件卸载之后执行的----onUnmounted")
-      })
-
-      onRenderTracked((event)=>{
-        console.log("状态跟踪钩子函数---------")
-        console.log(event)
-      })
-
-      onRenderTriggered((event)=>{
-        console.log("状态精准跟踪钩子函数---------onRenderTriggered")
-        console.log(event)
-      })
-
       const refData = toRefs(data);
+      
+      const overText = ref("英雄联盟");
+      const overAction = () =>{
+        overText.value = '选择完毕|' + overText.value; 
+        //document.title = overText.value;
+      }
+
+      watch([overText, () => data.selectHero], (newValue, oldValue)=>{
+        console.log(`new---->${newValue}`);
+        console.log(`old---->${oldValue}`);
+
+        document.title = newValue[0];
+      })
+
 
       return{
-        ...refData
+        ...refData,
+        overText,
+        overAction
       }
     }
   });

@@ -219,4 +219,44 @@ export default defineComponent({
     })
 ````
 
+##### 监听 watch
+
+````javascript 
+ export default({
+    name: 'App',
+    setup(){
+      console.log("1-开始创建组件-----setup()")
+      const data: DataProps = reactive({
+        heros:["刘备", "张飞", "关羽"],
+        selectHero:'',
+        selectHeroFun:(index:number)=>{
+          data.selectHero = data.heros[index]
+        }
+      });
+      const refData = toRefs(data);
+      
+      const overText = ref("英雄联盟");
+      const overAction = () =>{
+        overText.value = '选择完毕|' + overText.value; 
+        //document.title = overText.value;
+      }
+
+    /*时间监听 */
+      watch([overText, () => data.selectHero], (newValue, oldValue)=>{
+        console.log(`new---->${newValue}`);
+        console.log(`old---->${oldValue}`);
+
+        document.title = newValue[0];
+      })
+
+
+      return{
+        ...refData,
+        overText,
+        overAction
+      }
+    }
+  });
+````
+
 
