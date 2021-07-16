@@ -415,5 +415,63 @@ body,html{
 </style>
 `````
 
+##### axios异步请求
+
+````javascript
+// 界面引用
+<script lang="ts">
+  import {nowTime, getNowTime} from './hooks/useNowTime'
+
+  export default({
+    name: 'App',
+    setup(){
+      
+      return{
+        nowTime,getNowTime
+      }
+    }
+  });
+</script>
+````
+<!-- axios组件 0716-->
+
+````javascript
+import {ref} from 'vue'
+import axiox from 'axios'
+
+function useUrlAxios(url: string){
+    const result = ref(null)
+    const loading = ref(true)
+    const loaded = ref(false)
+    const error = ref(null)
+
+    axiox.get(url).then((res)=>{
+        loading.value = false
+        loaded.value = true
+        result.value = res.data
+
+
+    }).catch(e=>{
+        error.value = e
+        loading.value = false
+    })
+
+    return { result, loading, loaded, error}
+}
+
+export default useUrlAxios
+````
+
+````html
+<template>
+  <div>
+    <h2>欢迎来到德莱联盟</h2>
+    <div>随机选择一个英雄为你服务</div>
+    <div v-if="loading">Loading....</div>
+    <img v-if="loaded" :src="result.imgUrl" alt="">
+  </div>
+</template>
+````
+
 
 
