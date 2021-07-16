@@ -473,5 +473,24 @@ export default useUrlAxios
 </template>
 ````
 
+##### 独立组件 teleport
+创建Model.vue文件
+
+1.属性to 可以挂到任何组件上面
+
+`````html
+<teleport to="#modal">
+    <div id="center">
+      <h2>JSpang</h2>
+    </div>
+  </teleport>
+`````
+
+````javascript
+// 直接引用
+import modal from './components/Model.vue'
+
+````
+
 
 
