@@ -491,6 +491,55 @@ export default useUrlAxios
 import modal from './components/Model.vue'
 
 ````
+##### suspense
+```javascript
+<script lang="ts">
+  import useUrlAxios from './hooks/useURLTime'
+  import AsyncShow from "@/components/AsyncShow.vue";// 界面引入
+
+
+  export default({
+    name: 'App',
+    components:{AsyncShow},
+    setup(){
+      return{}
+    },
+  });
+</script>
+```
+```html
+<template>
+  <div>
+<!--      引入suspense-->
+    <Suspense>
+      <template #default>
+        <AsyncShow></AsyncShow>
+      </template>
+      <template #fallback>
+        <h1>Loading....</h1>
+      </template>
+    </Suspense>
+  </div>
+</template>
+```
+```vue
+<template>
+  <h1>{{ result }}</h1>
+</template>
+
+<script lang="ts">
+import {defineComponent} from "vue";
+export default defineComponent({
+  setup(){
+    return new Promise((resolve, reject) => {
+      setTimeout(()=>{
+        return resolve({result:"jspang"})
+      }, 1000)
+    })
+  }
+})
+</script>
+```
 
 
 

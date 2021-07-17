@@ -1,25 +1,26 @@
 <template>
   <div>
-    <h2>欢迎来到德莱联盟</h2>
-    <div>随机选择一个英雄为你服务</div>
-    <div v-if="loading">Loading....</div>
-    <modal></modal>
-    <img v-if="loaded" :src="result.imgUrl" alt="">
+    <Suspense>
+      <template #default>
+        <AsyncShow></AsyncShow>
+      </template>
+      <template #fallback>
+        <h1>Loading....</h1>
+      </template>
+    </Suspense>
   </div>
 </template>
 
 <script lang="ts">
   import useUrlAxios from './hooks/useURLTime'
-  import modal from './components/Model.vue'
+  import AsyncShow from "@/components/AsyncShow.vue";
 
 
   export default({
     name: 'App',
-    components:{modal},
+    components:{AsyncShow},
     setup(){
-      const {result, loading, loaded} = useUrlAxios("https://apiblog.jspang.com/default/getGirl")
-
-      return {result, loading, loaded}
+      return{}
     },
   });
 </script>
