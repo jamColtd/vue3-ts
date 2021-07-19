@@ -541,5 +541,78 @@ export default defineComponent({
 </script>
 ```
 
+##### 深入suspense
+
+```vue
+
+// 创建文件
+<template>
+    <img :src="result && result.imgUrl" alt="">
+</template>
+
+<script lang="ts">
+import {defineComponent} from 'vue'
+import axios from 'axios'
+export default defineComponent({
+    async setup(){ //使用异步请求-异步 async
+        const rewData = await axios.get('https://apiblog.jspang.com/default/getGirl-1')
+
+        return {result: rewData.data}
+    }
+})
+</script>
+```
+<!-- 引入文件 使用onErrorCaptured 铺获错误-->
+```vue
+<template>
+  <div>
+    <Suspense>
+      <template #default>
+        <!-- <AsyncShow></AsyncShow> -->
+        <hroe></hroe>
+      </template>
+      <template #fallback>
+        <h1>Loading....</h1>
+      </template>
+    </Suspense>
+  </div>
+</template>
+
+<script lang="ts">
+  // import useUrlAxios from './hooks/useURLTime'
+  // import AsyncShow from "@/components/AsyncShow.vue";
+  import hroe from "./components/hroeL.vue"
+  import {onErrorCaptured} from "vue"
+  
+
+  export default({
+    name: 'App',
+    components:{hroe},
+    setup(){
+      onErrorCaptured ((error) => { //onErrorCaptured 接口错误返回铺货
+        console.log(`error===>`, error)
+        return true
+      })
+      return{}
+    },
+  });
+</script>
+
+<style>
+body,html{
+  height: 100%;
+  width: 100%;
+}
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+}
+</style>
+
+```
 
 

@@ -2,7 +2,8 @@
   <div>
     <Suspense>
       <template #default>
-        <AsyncShow></AsyncShow>
+        <!-- <AsyncShow></AsyncShow> -->
+        <hroe></hroe>
       </template>
       <template #fallback>
         <h1>Loading....</h1>
@@ -12,14 +13,20 @@
 </template>
 
 <script lang="ts">
-  import useUrlAxios from './hooks/useURLTime'
-  import AsyncShow from "@/components/AsyncShow.vue";
-
+  // import useUrlAxios from './hooks/useURLTime'
+  // import AsyncShow from "@/components/AsyncShow.vue";
+  import hroe from "./components/hroeL.vue"
+  import {onErrorCaptured} from "vue"
+  
 
   export default({
     name: 'App',
-    components:{AsyncShow},
+    components:{hroe},
     setup(){
+      onErrorCaptured ((error) => {
+        console.log(`error===>`, error)
+        return true
+      })
       return{}
     },
   });
